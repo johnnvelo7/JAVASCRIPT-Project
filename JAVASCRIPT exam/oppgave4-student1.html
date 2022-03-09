@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html id="css" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 4 - Student 1</title>
+
+</head>
+<body>
+    
+    <!--
+        USERNAME : 5061
+        PASSWORD: 1234
+    -->
+
+
+    <div id="log-in"> <!--En enkel login system som jeg har laget-->
+    <input id="user-id" type="text" value="Account Number">
+    <input id="password-input" type="password" value="password">
+    <input id="password-btn" type="button" value="Login">
+    </div>
+
+    <div id="output-div"></div>
+    <div id="show-money"></div>
+    <div id="money-withdrawn"></div>
+    <div id="money-withdrawn-div"></div>
+
+    <script>
+
+        // CSS - Liten css slik at ATM ser bra ut :)
+
+        document.getElementById("css").style.backgroundColor = "lightyellow";
+        document.getElementById("css").style.textAlign = "center";
+        document.getElementById("css").style.font = "helvetica";
+
+        // HTML
+        var passInput = document.getElementById("password-input");
+        var userInput = document.getElementById("user-id");
+        var passBtn = document.getElementById("password-btn");
+        var logIn = document.getElementById("log-in");
+
+        var outputDiv = document.getElementById("output-div");
+        var showBankMoney = document.getElementById("show-money");
+        var showWithdrawnMoney = document.getElementById("money-withdrawn");
+        var moneyWithdrawnDiv = documenlt.getElementById("money-withdrawn-div");
+        
+        // VARIABLER
+
+        var pinCode = "1234";
+        var Account = "5061";
+        var numberOfMoneyInBank = 4;
+        var numberOfMoneyWithdrawn = 0;
+
+        // FUNKSJONER
+
+        function login (){ // lagde denne koden for å sjekke om pinkode og username er riktig
+        if(pinCode === passInput.value && Account === userInput.value){
+            outputDiv.innerHTML = `
+            <h1>WELCOME BACK!!!</h1>`;
+        }else{
+            alert("wrong password or username");
+            }
+        }
+        function allMoney (){ // Den sjekker igjen om pinkode og userID er riktig før den viser deg hvor mye penger som er i kontoen
+            if(pinCode === passInput.value && Account === userInput.value){
+                for(i = 0; i < numberOfMoneyInBank; i++){
+                    showBankMoney.innerHTML += `<img src="images/fem-hundre-kroner.png">`;}
+                outputDiv.innerHTML = `
+                <article>
+                    <h2>You have ${numberOfMoneyInBank * 500} in your account</h2>
+                    <p>Press the money to withraw</p>
+                </article>`;
+            }else{
+            alert("wrong password or username");}
+        }
+            
+        function withdrawMoney (){ // Siden oppgaven spør om å ta ut 500kr om gangen så bestemte jeg meg å ha 500kr * 4 = 2000kr.
+        showBankMoney.innerHTML = "";
+        numberOfMoneyInBank--;
+        for(i = 0; i < numberOfMoneyInBank; i++){
+            showBankMoney.innerHTML += `<img src="images/fem-hundre-kroner.png">`;}
+            outputDiv.innerHTML = `
+            <article>
+            <h2>You have ${numberOfMoneyInBank * 500} in your account</h2>
+            <p>Press the money to withraw</p>
+            </article>`;
+            numberOfMoneyWithdrawn++;
+            for(i = 0; i < 1; i++){ // Hvergang man tar ut penger, så blir bildene overført til andre siden (Wallet)
+                showWithdrawnMoney.innerHTML += `<img src="images/fem-hundre-kroner.png" width="100px">`;}
+                moneyWithdrawnDiv.innerHTML = ` 
+                <article>
+                <h2>You have ${numberOfMoneyWithdrawn * 500} in your wallet</h2>
+                <p>Press the money to withraw</p>
+                </article>`;} // Jeg brukte for loop for å skrive ut 500 lapper. Etter det brukte jeg "numberOfMoneyInBank" og "numberOfMoneyWithdrawn" for å bestemme "i" verdien i loop'en
+
+        outputDiv.innerHTML = `HELLO WELCOME`;
+
+        // EVENTS
+
+        passBtn.onclick = login;
+        passBtn.onclick = allMoney;
+        showBankMoney.onclick = withdrawMoney;
+
+
+    </script>
+
+
+</body>
+</html>

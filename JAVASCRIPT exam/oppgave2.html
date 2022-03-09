@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 2 - Dragracing</title>
+    <link rel="stylesheet" href="css/oppgave2.css">
+</head>
+<body>
+
+    <h1 id="drag-racing">Click here to start Dragracing!!!</h1>
+
+    <div id="road-div"></div>
+    
+    <img id="blue-car" src="images/blue-car.png">
+    <img id="green-car" src="images/green-car.png">
+    <img id="red-car" src="images/red-car.png">
+
+    <div id="finish-line"></div>
+
+    <div id="output-div"></div>
+    
+    <script>
+
+        //HTML
+
+        var roadDiv = document.getElementById("road-div");
+        var blueCar = document.getElementById("blue-car");
+        var redCar = document.getElementById("red-car");
+        var greenCar = document.getElementById("green-car");
+
+        var finishLine = document.getElementById("finish-line");
+        var outputDiv = document.getElementById("output-div");
+        var startBtn = document.getElementById("drag-racing");
+
+        // VARIABLES 
+
+      
+        var car1 = Math.floor(Math.random()* 200); // Jeg prøvde flere løsninger, men dette er den nærmeste jeg kommer på
+        var car2 = Math.floor(Math.random()* 200);
+        var car3 = Math.floor(Math.random()* 200);
+
+        var lengde = 700; //lengden 
+
+        // FUNKSJONER
+
+        function startRace () {
+            race();
+            setInterval(race,2000); // 2 sekunder interval
+        }
+        function race(){
+            carInterval();
+            carInterval2();
+            carInterval3();
+            winner();
+        }
+        function carInterval (){ // Brukte for loop for å kjøre bilen til venstre. Jeg fikk ikke til å ha det random etter hver 2de sekund. 
+            for(i = 0; i < car1; i++){
+            blueCar.style.left = `${car1}0.1px`;
+            }
+        }
+        function carInterval2 (){
+            for(i = 0; i < car2; i++){
+            redCar.style.left = `${car2}0.1px`;
+            }
+        }
+        function carInterval3 (){
+            for(i = 0; i < car3; i++){
+            greenCar.style.left = `${car3}0.1px`;
+            }
+        }
+        function winner (){ // Jeg prøvde å få til vinneren, men har ikke klart det til
+            var winner = lengde;
+            if(car1 >= 700 || car2 >= 700 || car3 >= 700){
+                outputDiv.innerHTML = `${winner} WON!!!`;
+            }
+        }
+        //EVENTS
+       
+        startBtn.onclick = startRace; // Button for å starte racingen
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 1</title>
+    <link rel="stylesheet" type="text/css" href="css/oppgave1.css">
+</head>
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Modern Art Maker</h1>
+
+    <label>Bredde</label>    
+    <input id="width-txt" type="text">
+
+    <label>Høyde</label>
+    <input id="height-txt" type="text">
+
+    <hr>
+
+    <label>Farge</label>
+    <input id="background-color-txt" type="text">
+
+    <hr>
+
+    <label>Posisjon fra venstre (left)</label>
+    <input id="left-position" type="text">
+
+    <label>Posisjon fra toppen (top)</label>
+    <input id="top-position" type="text">
+
+    <hr>
+
+    <input id="add-box-btn" type="button" value="Legg til">
+    <input id="remove-box-btn" type="button" value="slett boks">
+    <input id="more-box-btn" type="button" value="more box">
+
+    <p id="status-p">Antall bokser lagt til: 0</p>
+
+    <div id="output-div1"></div>
+    <div id="output-div2"></div>
+
+
+    <script>
+
+        // HTML OBJECTS
+        
+        var widthTxt = document.getElementById("width-txt");
+        var heightTxt = document.getElementById("height-txt");
+        var backgroundColorTxt = document.getElementById("background-color-txt");
+        var leftTxt = document.getElementById("left-position");
+        var topTxt = document.getElementById("top-position");
+
+        var addBoxBtn = document.getElementById("add-box-btn");
+        var removeBoxBtn = document.getElementById("remove-box-btn");
+        var addMoreBoxBtn = document.getElementById("more-box-btn");
+
+        var statusP = document.getElementById("status-p");
+        var outputDiv1 = document.getElementById("output-div1");
+        var outputDiv2 = document.getElementById("output-div2");
+        var outputDiv3 = document.getElementById("output-div3");
+
+    
+        // VARIABLES
+
+        var boxWidth;
+        var boxHeight;
+        var boxColor;
+        var leftPosition;
+        var topPosition;
+        var numberOfBox;
+        var number = 0;
+
+
+        // FUNCTIONS
+
+        function makeBox1 (){ //Funksjonen man bruker for å lage bokser gjennom CSS
+        boxWidth = widthTxt.value;
+        boxHeight = heightTxt.value;
+        boxColor = backgroundColorTxt.value;
+        topPosition = topTxt.value;
+        leftPosition = leftTxt.value;
+
+        outputDiv1.style.width = `${boxWidth}px`; // Endrer størrelsen
+        outputDiv1.style.height = `${boxHeight}px`; // Endrer Høyden 
+        outputDiv1.style.left = `${leftPosition}px`; // Bytter posisjon fra venstre
+        outputDiv1.style.top = `${topPosition}px`; // Bytter posisjon fra toppen
+        outputDiv1.style.backgroundColor = boxColor; // Bytter fargen på boksen
+        makeMoreBox();
+        };
+
+        function pStatus (){ // En enkel tall counter
+            number++;
+            statusP.innerHTML = `Antall bokser lagt til: ${number}`;
+        }
+
+        function removeBox (){ //Funksjoner man bruker for å fjerne bokser
+            outputDiv1.style = "none";
+        };
+
+        function makeMoreBox (){ // jeg har ikke klart å produsere flere bokser på denne oppgaven
+            numberOfBox++;
+            for(var i = 0; i < numberOfBox; i++){
+                outputDiv1.style += outputDiv1.innerHTML; //Prøvde denne + Arrays, men ingen funket
+            }
+        }
+        // EVENTS - Knapper for å lage og slette bokser
+        
+        addBoxBtn.onclick =  makeBox1;
+        addMoreBoxBtn.onclick = pStatus;
+        removeBoxBtn.onclick = removeBox;
+
+    </script>
+    
+    </body>
+</html>l

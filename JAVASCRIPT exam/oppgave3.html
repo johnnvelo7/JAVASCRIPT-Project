@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3 - Middelalderbygninger</title>
+</head>
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Middelalderbygninger</h1>
+    <p>Lyst til å bo i en middelalderbygning? Vi har de beste middelalderbygningene! :)</p>
+
+    <input id="show-all-btn" type="button" value="Vis alle">
+
+    <hr>
+
+    <label>Minimum pris</label>
+    <input id ="minimum-pris" type="number">
+    <label>Maksimum pris</label>
+    <input id="maksimum-pris" type="number">
+    <input id="sorter-pris-btn" type="button" value="Vis etter pris">
+
+    <hr>
+
+   <!-- Hint: Å hente value fra valgt <option> fungerer på samme måte som å hente value fra en tekstboks -->
+    <select id="category-select"><!-- Du endrer på options for å tilpasse til din løsning -->
+        <option>--Choose Category--</option>
+        <option value="Good">Good</option>
+        <option value="Bad">Bad</option>
+        <option value="Best">Best</option>
+    </select>
+
+    <input id="category-btn" type="button" value="Vis etter kategori">
+
+    <hr>
+
+    <div id="output-div">
+    </div>
+
+    <script>
+
+
+    // HTML
+
+    var minPris = document.getElementById("minimum-pris");
+    var maksPris = document.getElementById("maksimum-pris");
+
+    var priceBtn = document.getElementById("sorter-pris-btn");
+    var catBtn = document.getElementById("category-btn");
+    var showAllBtn = document.getElementById("show-all-btn");
+
+    var catSelect = document.getElementById("category-select");
+    var outputDiv = document.getElementById("output-div");
+
+    // ARRAYS 
+
+
+    var houseArray = [
+        {
+        Name: "Building1",
+        Price: "20000",
+        Image: "building-1.png",
+        Category: "Good",},
+        {
+        Name: "Building2",
+        Price: "25000",
+        Image: "building-2.png",
+        Category: "Good",},
+        {
+        Name: "Building3",
+        Price: "30000",
+        Image: "building-3.png",
+        Category: "Good",},
+        {
+        Name: "Building4",
+        Price: "35000",
+        Image: "building-4.png",
+        Category: "Good",},
+        {
+        Name: "Building5",
+        Price: "40000",
+        Image: "building-5.png",
+        Category: "Bad",},
+        {
+        Name: "Building6",
+        Price: "60000",
+        Image: "building-6.png",
+        Category: "Best",}
+    ];
+
+    var numberOfHouses = houseArray.length;
+
+    // FUNKSJONER
+
+    function showHouses (){ // Brukte template literals for å vise alle husene
+        var htmlTxt = "";
+        for(var i = 0; i < numberOfHouses; i++){
+            htmlTxt += `
+            <article>
+                <h3>${houseArray[i].Name}</h3>
+                <p>${houseArray[i].Price}</p>
+                <p>${houseArray[i].Category}</p>
+                <img src="images/${houseArray[i].Image}">
+            </article>
+            `
+            ;
+        }
+        outputDiv.innerHTML = htmlTxt;
+    }
+
+    function showPrice (){
+        var htmlTxt = "";
+        var minPrice = minPris.value;
+        var maxPrice = maksPris.value;
+
+        if(minPrice < "20000" || maxPrice > "60000" ){ // Man må taste inn verdiene mellom 20 og 60 tusen
+            alert("Du må skrive tall mellom 20000 og 60000!");
+        }else{
+
+        for(var i = 0; i < numberOfHouses; i++){
+            if(houseArray[i].Price >= minPrice && houseArray[i].Price <= maxPrice){
+                htmlTxt += `
+            <article>
+                <h3>${houseArray[i].Name}</h3>
+                <p>${houseArray[i].Price}</p>
+                <p>${houseArray[i].Category}</p>
+                <img src="images/${houseArray[i].Image}">
+            </article>
+            `;
+             }
+            }
+        }
+        outputDiv.innerHTML = htmlTxt;
+    }
+
+    // Koden funket for litt siden, men tror det er en bug som gjør at den ikke fungerer. Har validert alt og har ikke funnet noe feil i koden . :/
+    function showCategory (){ 
+        var htmlTxt = "";
+        var catValue = catSelect.value;
+
+        for(var i = 0; i < numberOfHouses; i++){
+            if(houseArray[i].Category === catValue){
+                htmlTxt += `
+            <article>
+                <h3>${houseArray[i].Name}</h3>
+                <p>${houseArray[i].Price}</p>
+                <p>${houseArray[i].Category}</p>
+                <img src="images/${houseArray[i].Image}">
+            </article>
+            `;}
+            }
+        outputDiv.innerHTML = htmlTxt;
+    }
+        
+    // EVENTS
+
+    showAllBtn.onclick = showHouses;
+    priceBtn.onclick = showPrice;
+    catBtn = showCategory;
+
+    </script>
+
+</body>
+</html>
